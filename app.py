@@ -117,8 +117,8 @@ if uploaded is not None:
                 # text_result = pytesseract.image_to_string(cleaned) 
                 # st.session_state.ocr_text = text_result
                 reader = easyocr.Reader(['en'])
-                # img_array = np.array(cleaned)
-                text = reader.readtext(cleaned, detail=0)
+                img_array = np.array(cleaned)
+                text = reader.readtext(img_array, detail=0)
                 st.session_state.ocr_text = text
             
             st.success("Selesai!")
