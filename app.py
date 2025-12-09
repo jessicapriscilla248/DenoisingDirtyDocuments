@@ -114,8 +114,11 @@ if uploaded is not None:
                 
                 #OCR 
                 # config='--psm 6' diasumsikan blok teks seragam, bisa dihapus kl error
-                text_result = pytesseract.image_to_string(cleaned) 
-                st.session_state.ocr_text = text_result
+                # text_result = pytesseract.image_to_string(cleaned) 
+                # st.session_state.ocr_text = text_result
+                reader = easyocr.Reader(['en'])
+                text = reader.readtext(img, detail=0)
+                st.session_state.ocr_text = text
             
             st.success("Selesai!")
 
