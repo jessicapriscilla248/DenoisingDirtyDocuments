@@ -97,7 +97,7 @@ if uploaded is not None:
         st.write("Dokumen awal yang memiliki noise.")
         img = Image.open(uploaded) #tampilin gambar
         st.image(img, caption="Dokumen Asli", width=420)
-
+        
         st.markdown("""
             <style>
                 .stButton>button {
@@ -120,7 +120,8 @@ if uploaded is not None:
                 reader = easyocr.Reader(['en'])
                 img_array = np.array(cleaned)
                 text = reader.readtext(img_array, detail=0)
-
+                
+                tanda = 0
                 flat = []
                 for item in text:
                     if isinstance(item, list):
@@ -129,17 +130,17 @@ if uploaded is not None:
                         flat.append(item)
                 
                 final_text = " ".join(flat)
-
+                
                 st.session_state.ocr_text = final_text
             
             st.success("Selesai!")
 
     #yg udh bersih
     with col2:
-        st.header("Hasil Pemrosesan")
+        st.header("Hasil")
         
         #session state
-        if st.session_state.clean_img is not None:
+        if tanda == 1:
             tab_img, tab_ocr = st.tabs(["🖼️ Dokumen Bersih", "📝 Hasil OCR (Teks)"])
 
             st.markdown("""
