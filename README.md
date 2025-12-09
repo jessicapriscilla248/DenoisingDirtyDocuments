@@ -31,5 +31,5 @@ This project implements a **U-Net Autoencoder** to perform Image Denoising. The 
 * **Deep Learning:** TensorFlow / Keras
 * **Image Processing:** OpenCV, NumPy
 * **Web App:** Streamlit
-* **OCR Testing:** PyTesseract
+* **OCR Testing:** EasyOCR
 
