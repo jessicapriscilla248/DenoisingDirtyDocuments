@@ -4,7 +4,6 @@ from tensorflow.keras.models import load_model
 from PIL import Image, ImageOps
 import math
 import easyocr
-import pytesseract  # Tambahan untuk OCR
 
 #load model yang udh dilatih
 @st.cache_resource
