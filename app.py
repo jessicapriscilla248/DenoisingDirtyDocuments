@@ -116,10 +116,21 @@ if uploaded is not None:
                 # config='--psm 6' diasumsikan blok teks seragam, bisa dihapus kl error
                 # text_result = pytesseract.image_to_string(cleaned) 
                 # st.session_state.ocr_text = text_result
+                
                 reader = easyocr.Reader(['en'])
                 img_array = np.array(cleaned)
                 text = reader.readtext(img_array, detail=0)
-                st.session_state.ocr_text = text
+
+                flat = []
+                for item in text:
+                    if isinstance(item, list):
+                        flat.extend(item)
+                    else:
+                        flat.append(item)
+                
+                final_text = " ".join(flat)
+
+                st.session_state.ocr_text = final_text
             
             st.success("Selesai!")
 
