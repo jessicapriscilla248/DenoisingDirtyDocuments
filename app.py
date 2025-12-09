@@ -138,10 +138,8 @@ if uploaded is not None:
 
     #yg udh bersih
     with col2:
-        st.header("Hasil")
-        
-        #session state
         if tanda == 1:
+            st.header("Hasil")
             tab_img, tab_ocr = st.tabs(["🖼️ Dokumen Bersih", "📝 Hasil OCR (Teks)"])
 
             st.markdown("""
