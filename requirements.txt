@@ -5,3 +5,8 @@ Pillow
 pytesseract
 easyocr
 protobuf
+torch
+torchvision
+torchaudio
+
+
