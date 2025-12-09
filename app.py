@@ -97,7 +97,8 @@ if uploaded is not None:
         st.write("Dokumen awal yang memiliki noise.")
         img = Image.open(uploaded) #tampilin gambar
         st.image(img, caption="Dokumen Asli", width=420)
-        
+
+        tanda = 0
         st.markdown("""
             <style>
                 .stButton>button {
@@ -121,7 +122,6 @@ if uploaded is not None:
                 img_array = np.array(cleaned)
                 text = reader.readtext(img_array, detail=0)
                 
-                tanda = 0
                 flat = []
                 for item in text:
                     if isinstance(item, list):
@@ -133,6 +133,7 @@ if uploaded is not None:
                 
                 st.session_state.ocr_text = final_text
             
+            tanda = 1
             st.success("Selesai!")
 
     #yg udh bersih
