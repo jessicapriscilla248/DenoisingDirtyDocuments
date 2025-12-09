@@ -3,7 +3,7 @@ import numpy as np
 from tensorflow.keras.models import load_model
 from PIL import Image, ImageOps
 import math
-# import pytesseract  # Tambahan untuk OCR
+import pytesseract  # Tambahan untuk OCR
 
 #load model yang udh dilatih
 @st.cache_resource
@@ -103,8 +103,6 @@ if uploaded is not None:
                 .stButton>button {
                     background-color: #BCC5E0; 
                     color: white;
-                    width: 100%;
-                    margin-top: 20px;
                 }
             </style>
         """, unsafe_allow_html=True)
@@ -116,26 +114,24 @@ if uploaded is not None:
                 
                 #OCR 
                 # config='--psm 6' diasumsikan blok teks seragam, bisa dihapus kl error
-                # text_result = pytesseract.image_to_string(cleaned) 
-                # st.session_state.ocr_text = text_result
+                text_result = pytesseract.image_to_string(cleaned) 
+                st.session_state.ocr_text = text_result
             
             st.success("Selesai!")
 
     #yg udh bersih
     with col2:
-        st.header("Hasil")
+        st.header("Hasil Pemrosesan")
         
         #session state
         if st.session_state.clean_img is not None:
             tab_img, tab_ocr = st.tabs(["🖼️ Dokumen Bersih", "📝 Hasil OCR (Teks)"])
-            
+
             st.markdown("""
                 <style>
                     .stDownloadButton>button {
                         background-color: #88DAED; 
                         color: white;
-                        width: 100%;
-                        margin-top: 20px;
                     }
                 </style>
             """, unsafe_allow_html=True)
@@ -160,14 +156,12 @@ if uploaded is not None:
             with tab_ocr:
                 st.write("Teks yang berhasil dibaca dari gambar bersih:")
                 #biar bs dicpy
-                coba = "selamat pagi"
-                st.text_area("Teks dalam Dokumen", coba, width=420)
-                # st.text_area("Extracted Text", st.session_state.ocr_text, height=400)
+                st.text_area("Teks dalam Dokumen", st.session_state.ocr_text, width=420)
                 
                 #download text
                 st.download_button(
                     label="Download Teks (.txt)",
-                    data=coba,
+                    data=st.session_state.ocr_text,
                     file_name="document_text.txt",
                     mime="text/plain"
                 )
